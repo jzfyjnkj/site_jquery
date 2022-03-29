@@ -1,0 +1,334 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>网站受访情况</title>
+    <script src="https://cdn.bootcdn.net/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.5.0/dist/css/bootstrap.min.css"
+        integrity="sha384-9aIt2nRpC12Uk9gS9baDl411NQApFmC26EwAOH8WgZl5MYYxFfc+NcPb1dKGj7Sk" crossorigin="anonymous">
+    <style>
+        th {
+            font-weight: lighter;
+            min-width: 130px;
+        }
+
+        tbody tr:hover {
+            background: #ffffe2;
+        }
+
+        .pagingBtn{
+            display: inline-block;
+            position: relative;
+            left: 50%;
+            transform: translateX(-50%);
+        }
+
+        .pageing-btn-plugin {
+            color: #50a9fd;
+        }
+
+        .pageing-btn-plugin>span {
+            display: inline-block;
+            font-size: 12px;
+            padding: 2px 10px;
+            border: 1px solid;
+            text-align: center;
+            line-height: 16px;
+            margin: 5px;
+            cursor: pointer;
+            border-radius: 4px;
+            background: white;
+        }
+
+        .pageing-btn-plugin>.active {
+            background: #feffb1;
+        }
+        .lookup-wrap{
+            position: absolute;
+            top: 6px; right: 0;
+            width: 320px;
+        }
+        .lookup-wrap .form-control, .lookup-wrap .btn{
+            position: absolute;
+        }
+        .lookup-wrap .form-control{
+            width: 70%;
+            left: 0;
+        }
+        .lookup-wrap .btn{
+            right: 20px;
+            left: auto;
+        }
+        .hide{
+            display: none;
+        }
+    </style>
+</head>
+<body>
+    <table class="table table-bordered" width='100%'>
+        <thead class="text-light bg-dark" width='100%'>
+            <tr>
+                <th width='2%'>序号</th>
+                <th>访问 IP</th>
+                <th>访问地址</th>
+                <th>日期</th>
+                <th>访问时间</th>
+                <th>访问设备</th>
+                <th>入口页面</th>
+            </tr>
+        </thead>
+        <tbody></tbody>
+
+    </table>
+
+    <div class="pagingBtn"></div>
+
+    <div class="lookup-wrap">
+        <input type="text" class="form-control" id='input' placeholder="请输入要查询的 IP">
+        <button type="button" class="btn btn-light" id="lookup">搜索</button>
+    </div>
+
+    <script>
+        /* pagingBtn({
+            dom: Element,  // 要插入的dom
+            nowPage: 1,  // 默认显示页面
+            allPage: 10,  // 页面总数
+            showPage: 3  // 显示数字按钮数(最小值：3 )
+            changePage: function  // 页面变动后执行函数
+        }); */
+
+        (function () {
+            function PagingBtn(options) {
+                this.dom = options.dom || '';
+                this.nowPage = options.nowPage || 1;
+                this.allPage = options.allPage || 10;
+                this.showPage = options.showPage || 3;
+                this.changePage = options.changePage || function () { }
+
+                this.wrap = '';
+
+                this.init = function () {
+                    this.fillHTML();
+                    this.bindEvent();
+                }
+            }
+            // 渲染数组
+            PagingBtn.prototype.renderArr = function () {
+                let _now = this.nowPage, _all = this.allPage, _show = this.showPage, _arr = [];
+                let _numArr = new Array(_all);
+                let _showArr = new Array(_show);
+                if (_show == _all - 2 || _all < 5) {
+                    for (let i = 0; i < _numArr.length; i++) {
+                        _numArr[i] = i + 1;
+                    }
+                    _arr.unshift(_numArr);
+                } else if (_show > _all - 2 || _now > _all) {
+                    console.warn('传入参数：nowPage 或 showPage 必须小于 allPage - 2');
+                    return false;
+                } else if (_show < 3) {
+                    console.warn('大哥，_show 最小值为 3 ');
+                    return false;
+                } else {
+                    // 逻辑很强，嫑瞎猜
+                    _arr = [1, '...', _all];
+                    if (_now >= _all - Math.ceil(_show / 2)) {
+                        for (let j = 0; j < _show; j++) {
+                            _showArr[j] = j + (_all - _show);
+                        }
+                        _arr.splice(2, 0, _showArr);
+                    } else if (_now < _show) {
+                        for (let j = 0; j < _show; j++) {
+                            _showArr[j] = j + 2;
+                        }
+                        _arr.splice(1, 0, _showArr)
+                    } else if (_now >= _show && _now < _all - Math.ceil(_show / 2)) {
+                        if (_now <= 4) {
+                            for (let j = 0; j < _show; j++) {
+                                _showArr[j] = j + _now - Math.floor(_show / 2);
+                            }
+                            if (_showArr[0] > 2) {
+                                _arr = [1, '...', '...', _all];
+                                _arr.splice(2, 0, _showArr);
+                            } else {
+                                _arr.splice(1, 0, _showArr);
+                            }
+                        } else {
+                            _arr = [1, '...', '...', _all];
+                            for (let j = 0; j < _show; j++) {
+                                _showArr[j] = j + _now - Math.floor(_show / 2);
+                            }
+                            _arr.splice(2, 0, _showArr);
+                        }
+                    }
+                }
+                return _arr;
+            }
+
+            // 渲染dom结构
+            PagingBtn.prototype.fillHTML = function () {
+                this.dom.innerHTML = '';
+                let arr = this.renderArr();
+                // 数组降维
+                let newArr = Array.prototype.concat.apply([], arr);
+
+                let flag = document.createDocumentFragment();
+                let btnLeft = '<span class="previous">上一页</sapn>';
+                let btnRight = '<span class="next">下一页</sapn>';
+
+                this.wrap = document.createElement('div');
+                this.wrap.className = 'pageing-btn-plugin';
+
+                this.wrap.innerHTML = btnLeft;
+                let str = ``;
+                for (let i = 0; i < newArr.length; i++) {
+                    str = `<span>${newArr[i]}</span>`;
+                    if (newArr[i] == '...') {
+                        str = `<em>${newArr[i]}</em>`;
+                    }
+                    if (newArr[i] == this.nowPage) {
+                        str = `<span class='active'>${newArr[i]}</span>`
+                    }
+                    this.wrap.innerHTML += str;
+                }
+                this.wrap.innerHTML += btnRight;
+
+                flag.appendChild(this.wrap);
+                this.dom.appendChild(flag);
+
+            }
+
+            // 点击事件
+            PagingBtn.prototype.bindEvent = function () {
+                let self = this;
+                this.wrap.onclick = function (e) {
+                    let target = e.target;
+                    if (target.className == 'pageing-btn-plugin' || target.innerText == '...') {
+                        return false;
+                    }
+                    if (target.className == 'previous') {
+                        self.nowPage--;
+                        if (self.nowPage < 1) {
+                            self.nowPage = 1;
+                        }
+                        self.init();
+                        self.changePage(self.nowPage);
+                    } else if (target.className == 'next') {
+                        self.nowPage++;
+                        if (self.nowPage > self.allPage) {
+                            self.nowPage = self.allPage;
+                        }
+                        self.init();
+                        self.changePage(self.nowPage);
+                    } else {
+                        let num = Number(target.innerText);
+                        self.nowPage = num;
+                        self.init();
+                        self.changePage(self.nowPage);
+                    }
+                    // console.log(self.nowPage)
+
+                }
+            }
+
+            function pagingBtn(options) {
+                let obj = new PagingBtn(options);
+                obj.init();
+            }
+            window.pagingBtn = pagingBtn;
+        }())
+    </script>
+    <script>
+        const itemPage = 16;
+        render();
+        function render () {
+            if (location.hash) {
+                lookup(location.hash.slice(1))
+            } else {
+                $.ajax({
+                    type: 'GET',
+                    url: 'http://jzfyjnkj.com/data/visitor',
+                }).then(res => {
+                    let len = Math.ceil(res.length / itemPage);
+                    getPaging();
+                    pagingBtn({
+                        dom: document.getElementsByClassName('pagingBtn')[0],  // 要插入的dom
+                        nowPage: 1,  // 默认显示页面
+                        allPage: len,  // 页面总数
+                        // showPage: 3,  // 显示数字按钮数(最小值：3 )
+                        changePage: function () {  // 页面变动后执行函数
+                            getPaging(this.nowPage);
+                        }
+                    });
+                });
+            }
+        }
+
+        $('#lookup').on('click', () => {
+            let value = $('#input').prop('value');
+            if (value === '') return;
+            lookup(value);
+            location.hash = value;
+            $('.pagingBtn').addClass('hide');
+        })
+
+        window.addEventListener('hashchange', () => {
+            render();
+        })
+
+        function lookup (val) {
+            $.ajax({
+                type: 'GET',
+                url: 'http://jzfyjnkj.com/data/visitor/lookup',
+                data: {
+                    str: val
+                }
+            }).then(res => {
+                let html = ''
+                res.forEach((val, i) => {
+                    let string = `<tr class=${i % 2 === 1 ? 'bg-light' : ''}>
+                        <th>${i + 1}</th>
+                        <th>${val.ip}</th>
+                        <th>${val.url}</th>
+                        <th>${val.day}</th>
+                        <th>${val.time}</th>
+                        <th>${val.browser}</th>
+                        <th>${val.href.slice(0, 100)}</th>
+                    </tr>`;
+                    html += string;
+                });
+                $('tbody').html(html)
+            })
+        }
+
+        function getPaging(page = 1, paging = itemPage) {
+            $.ajax({
+                type: 'GET',
+                url: 'http://jzfyjnkj.com/data/visitor/paging',
+                data: {
+                    page: page,
+                    paging: paging,
+                }
+            }).then(res => {
+                let html = ''
+                res.forEach((val, i) => {
+                    let string = `<tr class=${i % 2 === 1 ? 'bg-light' : ''}>
+                        <th>${itemPage * page - itemPage + i + 1}</th>
+                        <th>${val.ip}</th>
+                        <th>${val.url}</th>
+                        <th>${val.day}</th>
+                        <th>${val.time}</th>
+                        <th>${val.browser}</th>
+                        <th>${val.href.slice(0, 100)}</th>
+                    </tr>`;
+                    html += string;
+                });
+                // console.log(html)
+                $('tbody').html(html)
+            })
+        }
+
+        
+    </script>
+</body>
+</html>

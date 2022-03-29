@@ -1,0 +1,172 @@
+.product-unit{
+  .btns{
+    button{
+      padding: 10px 20px;
+      font-size: 16px;
+      cursor: pointer;
+      &.active{
+        color: #4385e8;
+      }
+    }
+  }
+  ul{
+    display: none;
+    li{
+      padding: 20px 0;
+      &:nth-of-type(2n+1){
+        background: #eee;
+      }
+      &:nth-of-type(2n) .wrap{
+        .img, .content{
+          float: right;
+        }
+      } 
+    }
+    &.active{
+      display: block;
+    }
+  }
+  .wrap{
+    text-align: center;
+    .content, .img{
+      width: 50%;
+      float: left;
+    }
+    .content{
+      padding: 60px 40px;
+      box-sizing: border-box;
+      line-height: 2.4;
+      .text{
+        text-align: left;
+        text-indent: 2em;
+      }
+      a{
+        color: #409EFF;
+      }
+      h2{
+        margin: 20px 0;
+      }
+      p{
+        margin: 14px 0;
+      }
+    }
+    .img{
+      img{
+        width: 85%;
+        transition: transform .8s;
+      }
+    }
+  }
+  li:hover .img img{
+    transform: scale(1.1);
+  }
+}
+@media (max-width: 996px) {
+  .product-unit{
+    .wrap{
+      .img{
+        width: 60%;
+      }
+      .content{
+        width: 40%;
+      }
+    }
+  }
+}
+@media (max-width: 768px) {
+  .product-unit{
+    .wrap{
+      .content, .img{
+        width: 100%;
+      }
+      .content{
+        padding: 0;
+        h2, p{
+          margin: 0;
+        }
+      }
+    }
+  }
+}
+
+.markdown-preview{
+  // max-width: 850px;
+  margin: 0 auto;
+  font-family: "Helvetica Neue",Helvetica,"Segoe UI",Arial,freesans,sans-serif;
+  line-height: 2;
+  text-align: justify;
+  p{
+    text-indent: 2em;
+  }
+  li{
+    font-size: 16px;
+  }
+  a{
+    text-decoration: none;
+    color: #08c;
+  }
+  h1{
+    text-align: center;
+  }
+  .code-wrap{
+    white-space: pre;
+    /* line-height: 12px; */
+    font-family: Consolas;
+    font-size: 14px;
+    background: #eee;
+    padding-bottom: 20px;
+    margin: 16px 0;
+  }
+  .code-wrap em{
+    color: #999;
+  }
+  .code-wrap, .notes{
+    padding-left: 10px;
+  }
+  li{
+    margin: 10px 20px;
+    /* list-style: disc; */
+  }
+  li.list2{
+    margin-left: 40px;
+    list-style: circle;
+  }
+  li.list3{
+    margin-left: 60px;
+    list-style: square;
+  }
+  li.order{
+    list-style: none;
+  }
+  li.order1{
+    font-weight: 700;
+  }
+  li.order2{
+    margin-left: 40px;
+  }
+  li.order3{
+    margin-left: 60px;
+  }
+  hr{
+    margin: 32px 0;
+    height: 2px;;
+    background-color: #48b378;
+    border: none;
+  }
+  blockquote{
+    margin: 10px 0;
+    line-height: 24px;
+    padding-right: 15px;
+    border-left: 4px solid;
+    white-space: normal;
+    color: #009765;
+    font-weight: 700;
+    font-size: 22px;;
+  }
+  .img-block > img{
+    position: relative;
+    max-width: 100%;
+    left: 50%;
+    transform: translateX(-50%);
+  }
+}

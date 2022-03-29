@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html lang="zh">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>晋中釜源节能科技有限公司 | 集控系统</title>
+  <meta name="baidu-site-verification" content="4e85OXLefS" />  <!-- 百度 -->
+  <meta name="360-site-verification" content="2e192c02d7c62f75b2bab4f14c132f7f" />  <!-- 360 -->
+  <meta name="sogou_site_verification" content="pKzu523yFE"/>  <!-- 搜狗 -->
+  <meta name="keywords" content="山西电锅炉,电磁锅炉,电锅炉,电磁热风炉,蒸汽发生器,空压机余热回收">
+  <meta name="description" content="山西晋中釜源科技主要从事变频电磁锅炉，电磁热风炉，电蒸汽发生器，空压机余热回收，矿井令凝水余热回收的研发、生产、销售及售后为一体的节能环保公司">
+  <link rel="icon" href="./img/favicon.ico">
+  <link rel="stylesheet" href="./css/reset.css">
+  <link rel="stylesheet" href="./css/common.css">
+  <link rel="stylesheet" href="./css/system.css">
+  <link rel="stylesheet" href="./css/product.css">
+  <script>
+    var _hmt = _hmt || [];
+    (function() {
+      var hm = document.createElement("script");
+      hm.src = "https://hm.baidu.com/hm.js?92d24f3cd8fce31f3fbb88f429852016";
+      var s = document.getElementsByTagName("script")[0]; 
+      s.parentNode.insertBefore(hm, s);
+      var src = "https://jspassport.ssl.qhimg.com/11.0.1.js?d182b3f28525f2db83acfaaf6e696dba";
+      document.write('<script src="' + src + '" id="sozz"><\/script>');
+    })();
+    document.title = '晋中釜源节能科技有限公司';
+  </script>
+  <script src="https://cdn.bootcdn.net/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
+  <script src="http://pv.sohu.com/cityjson?ie=utf-8"></script>
+  <script src="./js/vistor.js"></script>
+</head>
+<body>
+
+  <!-- 内容 -->
+  <div class="system-wrap leayer clearfix">
+    <div class="list fl">
+      <ul>
+        <li data-id="1">智能热网(热力站)集中监控系统</li>
+        <li data-id="2">空压机节电及余热回收系统</li>
+        <li data-id="3">无人值守换热站</li>
+        <li data-id="4">锅炉监控系统</li>
+        <li data-id="5">污水处理系统</li>
+        <li data-id="6">中央水泵房自动排水系统</li>
+        <li data-id="7">风机在线监控系统</li>
+        <li data-id="8">乳化液自动配比输送装置</li>
+        <li data-id="9">钢绳芯输送带在线检测系统</li>
+        <li data-id="10">水窝自动排水装置</li>
+        <li data-id="11">矿用多回路组合开关柜</li>
+        <li data-id="12">液压自动张紧装置</li>
+        <li data-id="13">中频电源</li>
+        <li data-id="14">GGD 低压固定式开关柜</li>
+        <li data-id="15">MNS 型低压抽出式成套开关柜</li>
+        <li data-id="16">二次网平衡智能调节系统</li>
+        <li data-id="17">多种物料组合式自动配料生产线</li>
+      </ul>
+    </div>
+    <div class="content fl"></div>
+    <div class="show-list"></div>
+  </div>
+
+  <script src="./js/common.js"></script>
+  <script>
+    function getSystem () {
+      var search = location.search.slice(6) || 1;
+      $.ajax({
+        url: `http://jzfyjnkj.com/data/system/${search}.md`,
+        type: 'GET'
+      }).then(function (res) {
+        // console.log(res);
+        $('.content').html(interpretMd(res));
+        document.title = $('#title').text();
+      })
+    }
+    getSystem();
+
+    if (location.search === '') {
+      $('.system-wrap .list li').eq(0).prop('class', 'active');
+    } else {
+      var number = location.search.slice(6);
+      $('.system-wrap .list li').eq(number - 1).prop('class', 'active');
+    }
+
+    // 事件
+    var count = 0;
+    $('.system-wrap .list').on('click', 'li', function () {
+      var str = $(this).attr('data-id');
+      location.search = 'list=' + str;
+      getSystem();
+    });
+    $('.system-wrap .show-list').on('click', function () {
+      count ++;
+      if (count % 2 === 1) {
+        $('.system-wrap .list').css({transform: 'translateX(0)'});
+        $('.system-wrap .show-list').css({transform: 'rotate(180deg)'});
+      } else {
+        $('.system-wrap .list').css({transform: 'translateX(-99%)'});
+        $('.system-wrap .show-list').css({transform: 'rotate(0)'});
+      }
+    })
+  </script>
+</body>
+</html>
