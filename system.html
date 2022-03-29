@@ -59,18 +59,13 @@
     <div class="show-list"></div>
   </div>
 
+  <script src="./data/system-list.js"></script>
   <script src="./js/common.js"></script>
   <script>
     function getSystem () {
       var search = location.search.slice(6) || 1;
-      $.ajax({
-        url: `http://jzfyjnkj.com/data/system/${search}.md`,
-        type: 'GET'
-      }).then(function (res) {
-        // console.log(res);
-        $('.content').html(interpretMd(res));
-        document.title = $('#title').text();
-      })
+      $('.content').html(interpretMd(systemList[search]));
+      document.title = $('#title').text();
     }
     getSystem();
 

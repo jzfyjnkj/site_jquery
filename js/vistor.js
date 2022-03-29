@@ -10,19 +10,19 @@ var browserArr1 = ['微信', 'QQ', 'UC','IOS', '移动端', 'PC'];
 var browserArr2 = [isWeiXin(), isQQBrowser(), isUCBrowser(), isIos(), isDeviceMobile(), isPC()];
 var browser = browserArr1[getIndex(browserArr2, true)];
 
-$.ajax({
-  url: 'http://jzfyjnkj.com/data/visitor/get',
-  data: {
-    // ipList: {
-      ip: ipList.ip,
-      day: `${y}-${m}-${d}`,
-      time: `${h}:${f}:${s}`,
-      url: ipList.url,
-      href: location.href,
-      browser: browser,
-    // }
-  }
-})
+// $.ajax({
+//   url: 'http://jzfyjnkj.com/data/visitor/get',
+//   data: {
+//     // ipList: {
+//       ip: ipList.ip,
+//       day: `${y}-${m}-${d}`,
+//       time: `${h}:${f}:${s}`,
+//       url: ipList.url,
+//       href: location.href,
+//       browser: browser,
+//     // }
+//   }
+// })
 
 function getIndex (arr, val) {
   for (var i = 0; i < arr.length; i++) {
