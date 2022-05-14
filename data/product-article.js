@@ -1,15 +1,21 @@
 var productArtilce = {
 bigualu: `
-# 家用电磁壁挂炉
-![ avatar ](./img/product-article/product1.jpg)
-> 详情介绍
-### 产品介绍：
-变频电磁采暖炉的核心是采用电磁感应原理，利用磁力线切割金属发生涡流所产生的热能作为热源，通过热量散发系统(如水暖系统)，以达到取暖目的的热量发生设备。
-### 工作原理：
-变频电磁采暖炉是利用电磁感应原理，将电能转换为磁热能，在控制器内由整流电路将50HZ的交流电压变成直流电压，再经过控制电路将直流电压转换成频率为22KHZ的高频电压。高频交流电压流过缠绕在非金属材料管外的高频导线，高速变化的磁场内部的磁力线切割非金属材料管内的通过金属容器时产生无数的小涡流，使水迅速发热，达到快速加热水的效果。
-![ avatar ](./img/product-article/10274.jpg)
-### 产品参数：
-![ avatar ](./img/product-article/17154.jpg)
+# 变频电磁采暖炉（壁挂式）
+## 产品介绍：
+晋中釜源节能科技有限公司生产的家用变频电磁采暖炉（壁挂式）全自动智能电加热，家用变频电磁采暖炉核心部件全部采用德国进口工业级别英飞凌IGBT模块，运行稳定，使用寿命长，可长时间高负荷运转。可变频节能，安全水电分离，永不漏电。发热体无需更换，不会产生电衰减，热效率不会降低。因其电磁感应加热为高频加热，故采暖炉不易结垢，后期维护更加方便、省心，使用寿命更长。
+- 供暖面积：20㎡-200㎡
+- 出回水温度：85℃/60℃
+- 采暖末端：暖气片、地暖
+- 设备功率：
+    - 220V:6KW、8KW、10KW、12KW
+    - 380V:6KW、8KW、10KW、12KW、15KW、20KW
+![ avatar ](./img/product-article/bigualu/001.jpg)
+![ avatar ](./img/product-article/bigualu/002.jpg)
+![ avatar ](./img/product-article/bigualu/003.jpg)
+![ avatar ](./img/product-article/bigualu/004.jpg)
+![ avatar ](./img/product-article/bigualu/005.jpg)
+![ avatar ](./img/product-article/bigualu/006.jpg)
+![ avatar ](./img/product-article/bigualu/007.jpg)
 `,
 reshuilu1: `
 # 变频电磁热水炉
@@ -25,17 +31,23 @@ reshuilu1: `
 ![ avatar ](./img/product-article/64253.jpg)
 `,
 reshuilu2: `
-# 变频电磁热水炉
-![ avatar ](./img/product-article/product3.jpg)
-> 详情介绍
-![ avatar ](./img/product-article/47150.jpg)
-### 产品介绍：
-变频电磁采暖炉的核心是采用电磁感应原理，利用磁力线切割金属发生涡流所产生的热能作为热源，通过热量散发系统(如水暖系统)，以达到取暖目的的热量发生设备。
-![ avatar ](./img/product-article/10274.jpg)
-### 工作原理：
-变频电磁采暖炉是利用电磁感应原理，将电能转换为磁热能，在控制器内由整流电路将50HZ的交流电压变成直流电压，再经过控制电路将直流电压转换成频率为22KHZ的高频电压。高频交流电压流过缠绕在非金属材料管外的高频导线，高速变化的磁场内部的磁力线切割非金属材料管内的通过金属容器时产生无数的小涡流，使水迅速发热，达到快速加热水的效果。
-### 产品参数：
-![ avatar ](./img/product-article/51753.jpg)
+# 商用变频电磁采暖炉
+## 产品介绍：
+晋中釜源节能科技有限公司开发的商用变频电磁采暖炉采用电磁感应技术，高频电磁涡流制热，热效率高，升温速度快，温度恒定，全自动智能恒定运行，无需专人值守，运行费用低。并且真正做到整机水电分离，避免了触电的安全隐患，全套设备软起软停，启动无冲击电流，且有过流、过载、超温等28项保护功能。标配液晶显示屏（带WIFI远程操控功能），也可选配PLC+触摸屏控制系统（支持RS485通讯）。商用变频电磁采暖炉设计体积小巧，外形设计美观，可随意摆放，对环境及空间要求低。
+- 供暖面积：400㎡-20000㎡
+- 出回水温度：85℃/60℃
+- 采暖末端：暖气片、地暖
+- 设备功率：
+    - 380V:40KW、50KW、60KW、120KW、180KW、240KW、300KW、400KW、500KW、600KW、800KW、1000KW（可定制更大功率）
+![ avatar ](./img/product-article/cainuanlu/001.jpg)
+![ avatar ](./img/product-article/cainuanlu/002.jpg)
+![ avatar ](./img/product-article/cainuanlu/003.jpg)
+![ avatar ](./img/product-article/cainuanlu/004.jpg)
+![ avatar ](./img/product-article/cainuanlu/005.jpg)
+![ avatar ](./img/product-article/cainuanlu/006.jpg)
+![ avatar ](./img/product-article/cainuanlu/007.jpg)
+![ avatar ](./img/product-article/cainuanlu/008.jpg)
+![ avatar ](./img/product-article/cainuanlu/009.jpg)
 `,
 reshuilu3: `
 # 变频电磁热水炉模块

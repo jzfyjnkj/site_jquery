@@ -165,7 +165,7 @@
   }
   .img-block > img{
     position: relative;
-    width: 100%;
+    max-width: 100%;
     left: 50%;
     transform: translateX(-50%);
   }

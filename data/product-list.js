@@ -2,7 +2,7 @@ var productList = {
   reshuilu: [
     {
       src: './img/product/reshuilu1.png',
-      name: '家用变频电磁壁挂炉',
+      name: '变频电磁采暖炉（壁挂式）',
       trait: 'WIFI控制 水电分离',
       kw: '6KW/8KW/10KW',
       capacity: '220V-380V',
@@ -20,7 +20,7 @@ var productList = {
     },
     {
       src: './img/product/reshuilu7.png',
-      name: '变频电磁热水炉',
+      name: '商用变频电磁采暖炉',
       trait: '低温防冻 智能控制',
       kw: '15KW/20KW/30KW',
       capacity: '380V',
